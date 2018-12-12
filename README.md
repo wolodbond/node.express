@@ -8,14 +8,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-sorry, no docker-compose. i know it's crime
+sorry, no docker-compose. i know it's crime <br/>
 
-install node version 10
-npm i
+install node version 10 <br/>
+npm i <br/>
 
-Install docker
-docker pull redis
-docker pull mongo
+Install docker <br/>
+docker pull redis <br/>
+docker pull mongo <br/>
 
 or
 
