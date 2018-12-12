@@ -1,0 +1,24 @@
+{
+  "env": {
+    "browser": false,
+    "node": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended", "plugin:jest/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", "tab"],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error"
+  },
+  "plugins": ["jest"]
+}

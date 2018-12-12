@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <style type="text/css">
+        #messages-box{ height: 200px; }
+    </style>
+    <title>Barbershop Services on Node</title>
+</head>
+<body>
+	<header id="main-header" class="bs-success text-white p-4 mb-3">
+		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+		  <a class="navbar-brand" href="/">Barbershop Services on Node</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Backend<span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a id="menu" class="nav-link" href="#">Menu</a>
+		      </li>
+		    </ul>		   
+		  </div>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item">
+		        <a id="signup" class="nav-link" href="#">Signup</a>
+		      </li>
+		      <li class="nav-item">
+		        <a id="signin" class="nav-link" href="#">Signin</a>
+		      </li>
+		      <li class="nav-item">
+		        <a id="signout" class="nav-link" href="#">Signout</a>
+		      </li>
+		    </ul>		   
+		  </div>
+		</nav>
+	</header>
+    <div class="container">
+        <div id="main" class="card card-body">
+            <h2 id="header-title">Barbershop Services on Node</h2>
+            <button type="button" id="add-item" class="btn btn-success btn-block" data-action="create">Create</button>
+            <hr>         
+            <div class="row">
+            	<div class="col-md-6">
+            		<h1>
+            			NodeMongo Chat
+            			<button id="clearBtn" class="btn btn-danger">clear</button>
+            		</h1>
+        			<input type="text" id="username" class="form-control" placeholder="Type name.."></input>
+            		</br>
+            		<div class="card">
+            			<div id="messages-box" class="card-block"></div>
+            		</div>
+            		</br>
+            		<textarea id="single-message" class="form-control" placeholder="Type message.."></textarea>
+            	</div>
+            </div> 
+            <div id="output"></div>
+            <hr>            
+        </div>        
+	</div> 
+	</br>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+    <script>
+        (function(){
+            var element = function(id){
+                return document.getElementById(id);
+            }
+
+            var messagesBox = element('messages-box');
+            var textarea = element('single-message');
+            var username = element('username');
+            var clearBtn = element('clearBtn');
+
+            var socket = io.connect('http://localhost:3000');
+
+            if (socket != undefined){
+                console.log('Connected to socket!');
+
+                textarea.addEventListener('keydown', function(event){
+                    if (event.which === 13 && event.shiftKey == false){
+
+                        socket.emit('input', {
+                            name: username.value,
+                            message: textarea.value
+                        });
+                        event.preventDefault();
+                    }
+                });
+
+                socket.on('output', function(data){
+                    if (data.length) {
+                        for (var i = 0; i < data.length; i++) {
+                            var message = document.createElement('div');
+                            message.setAttribute('class', 'room-message');
+                            message.textContent = data[i].name + ": " + data[i].message;
+                           // messagesBox.appendChild(message);
+                            messagesBox.insertBefore(message, messagesBox.firstChild);
+                        }                        
+                    }
+                });
+
+                clearBtn.addEventListener('click', function(){
+                    socket.emit('clear');
+                });
+
+                socket.on('cleared', function(){
+                    messagesBox.textContent = '';
+                });
+            }
+        })();        
+    </script>
+</body>
+</html>

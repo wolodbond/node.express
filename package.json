@@ -1,0 +1,47 @@
+{
+  "name": "facenet.express",
+  "version": "1.0.0",
+  "description": "Simple social network",
+  "main": "dist/server.bundle.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "build": "webpack && node dist/server.bundle.js",
+    "test": "jest",
+    "docs": "./node_modules/jsdoc/jsdoc.js -c ./.jsdoc.conf.json README.md",
+    "migrate:up": "node src/migrations/migrate_up.js",
+    "migrate:down": "node src/migrations/migrate_down.js",
+    "seed": "node src/seeders/seed.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.0",
+    "flat": "^4.1.0",
+    "jsdoc": "^3.5.5",
+    "mongoose": "^5.3.4",
+    "morgan": "^1.9.1",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "eslint": "^5.8.0",
+    "eslint-plugin-jest": "^22.0.0",
+    "faker": "^4.1.0",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "prettier": "1.14.3",
+    "supertest": "^3.3.0",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
