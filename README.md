@@ -29,11 +29,11 @@ use env-example file
 
 download from git repo
 
-docker run -d --name facenet-redis-container -p 127.0.0.1:6379:6379 redis
-docker run --name facenet-mongo --rm -p 127.0.0.1:27017:27017 -d mongo:latest mongod
+docker run -d --name facenet-redis-container -p 127.0.0.1:6379:6379 redis <br/>
+docker run --name facenet-mongo --rm -p 127.0.0.1:27017:27017 -d mongo:latest mongod <br/>
 
-## Running the tests
+## Running app and the tests
 
-npm start
-npm run test - for run all tests with code coverage
-npm run docs - for make documentation
+npm start <br/>
+npm run test - for run all tests with code coverage <br/>
+npm run docs - for make documentation <br/>
